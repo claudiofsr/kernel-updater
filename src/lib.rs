@@ -119,7 +119,7 @@ fn dkms_remove(kernel_old: &str, dkms_versao: &str) -> Result<()> {
 
 pub fn mkinitcpio() -> Result<()> {
     println!("Running mkinitcpio...");
-    run_command("mkinitcpio", &["-p", "linux612_ClaudioFSR"])?;
+    run_command("mkinitcpio", &["-p", "linux613_ClaudioFSR"])?;
     println!("mkinitcpio completed successfully.");
     Ok(())
 }
