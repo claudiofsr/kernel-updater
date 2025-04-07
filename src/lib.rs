@@ -29,7 +29,7 @@ pub fn kernel_compile(kernel_new: &str) -> Result<()> {
     run_command("make", &["modules_install"])?;
     run_command(
         "/usr/bin/cp",
-        &["-fv", "arch/x86/boot/bzImage", "/boot/vmlinuz-6.13"],
+        &["-fv", "arch/x86/boot/bzImage", "/boot/vmlinuz-6.14"],
     )?;
 
     println!("Kernel compilation completed successfully.\n");
