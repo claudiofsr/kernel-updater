@@ -52,14 +52,15 @@ pub fn dkms_install(config: &Config) -> Result<(), KernelUpdaterError> {
     let dkms_module_version = get_nvidia_version()?;
 
     let dkms_module_spec = format!("nvidia/{}", dkms_module_version);
-    let kernel_name_new = &config.kernel_ident_name_new;
+
+    let kernel_name_new = format!("{}-{}", &config.version_new, &config.custom_kernel_suffix);
 
     let build_args = [
         "install",
         "--force",
         &dkms_module_spec,
         "-k",
-        kernel_name_new,
+        &kernel_name_new,
     ];
 
     println!(

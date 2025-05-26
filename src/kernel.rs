@@ -141,7 +141,7 @@ pub fn kernel_install(config: &Config) -> Result<(), KernelUpdaterError> {
 
     // Get paths from Config
     let kernel_src_dir_path = &config.kernel_src_dir_path;
-    let kernel_ident_name = &config.kernel_ident_name_new;
+    let kernel_ident_name = format!("{}-{}", &config.version_new, &config.custom_kernel_suffix);
     let vmlinuz_path = &config.vmlinuz_install_path;
     let modules_install_base = &config.kernel_module_base;
     let modules_install_path = modules_install_base.join(kernel_ident_name);

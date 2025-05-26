@@ -90,7 +90,16 @@ impl Config {
         };
 
         let download_link = format!("{}/{}", &kernel_url_base, &tarball_name);
-        let kernel_ident_name_new = format!("{}-{}", &args.new, &custom_kernel_suffix);
+
+        let kernel_ident_name_new = if args.new.patch == 0 {
+            format!(
+                "{}.{}-{}",
+                &args.new.major, &args.new.minor, &custom_kernel_suffix
+            )
+        } else {
+            format!("{}-{}", &args.new, &custom_kernel_suffix)
+        };
+
         let kernel_ident_name_old = args
             .old
             .as_ref()
