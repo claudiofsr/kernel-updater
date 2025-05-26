@@ -74,9 +74,21 @@ impl Config {
 
         // --- Calculate Derived Paths and Names (Only reached if all validation passes) ---
         let config_file_path = kernel_config_base.join(format!("config-{}", &custom_kernel_suffix));
-        let kernel_src_dir_name = format!("linux-{}", &args.new);
+
+        let kernel_src_dir_name = if args.new.patch == 0 {
+            format!("linux-{}.{}", &args.new.major, &args.new.minor)
+        } else {
+            format!("linux-{}", &args.new)
+        };
+
         let kernel_src_dir_path = kernel_src_base.join(&kernel_src_dir_name);
-        let tarball_name = format!("linux-{}.tar.xz", &args.new);
+
+        let tarball_name = if args.new.patch == 0 {
+            format!("linux-{}.{}.tar.xz", &args.new.major, &args.new.minor)
+        } else {
+            format!("linux-{}.tar.xz", &args.new)
+        };
+
         let download_link = format!("{}/{}", &kernel_url_base, &tarball_name);
         let kernel_ident_name_new = format!("{}-{}", &args.new, &custom_kernel_suffix);
         let kernel_ident_name_old = args
