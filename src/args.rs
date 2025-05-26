@@ -18,21 +18,21 @@ use clap::{Parser, Subcommand, ValueEnum};
 #[command(after_help = "
 Examples:
 
-  Compile source tree for 6.14.4:
-  sudo kernel-updater -n 6.14.4 kernel-compile
+  Compile source tree for 6.15.4:
+  sudo kernel-updater -n 6.15.4 kernel-compile
 
-  Install compiled 6.14.4 kernel:
-  sudo kernel-updater -n 6.14.4 kernel-install # Assumes 6.14.4 compiled in /lib/modules/linux-6.14.4
+  Install compiled 6.15.4 kernel:
+  sudo kernel-updater -n 6.15.4 kernel-install # Assumes 6.15.4 compiled in /lib/modules/linux-6.15.4
 
-  Build/install DKMS for 6.14.4, remove for 6.14.3:
-  sudo kernel-updater -o 6.14.3 -n 6.14.4 dkms-install # Assumes 6.14.4 already installed
+  Build/install DKMS for 6.15.4, remove for 6.15.3:
+  sudo kernel-updater -o 6.15.3 -n 6.15.4 dkms-install # Assumes 6.15.4 already installed
 
   Full update (compile, install, dkms update):
-  sudo kernel-updater -o 6.14.3 -n 6.14.4
+  sudo kernel-updater -o 6.15.3 -n 6.15.4
 
 WARNING: For the default operation (no command) and 'dkms-install' command, the NEW version (-n) must be strictly greater than the OLD version (-o). 
 This validation is performed after parsing.
-E.g., kernel-updater -o 6.14.3 -n 6.14.4 is valid, but -o 6.14.4 -n 6.14.3 or -o 6.14.4 -n 6.14.4 will fail validation.
+E.g., kernel-updater -o 6.15.3 -n 6.15.4 is valid, but -o 6.15.4 -n 6.15.3 or -o 6.15.4 -n 6.15.4 will fail validation.
 ")]
 pub struct Arguments {
     /// Optional subcommand to execute. If none is specified, a full update (compile, install, dkms) is performed.
@@ -52,22 +52,22 @@ pub struct Arguments {
     #[arg(short, long, default_value = "ClaudioFSR", help = "The Kernel suffix")]
     pub suffix: String,
 
-    /// The new kernel version (Major.Minor.Patch, e.g., "6.14.4").
+    /// The new kernel version (Major.Minor.Patch, e.g., "6.15.4").
     #[arg(
         short,
         long,
         required = true, // Always required
-        help = "The new kernel version (e.g., \"6.14.4\")"
+        help = "The new kernel version (e.g., \"6.15.4\")"
     )] // Added help
     pub new: Version, // Parsed directly into a Version
 
-    /// The old kernel version ( Major.Minor.Patch, e.g., "6.14.3").
+    /// The old kernel version ( Major.Minor.Patch, e.g., "6.15.3").
     #[arg(
         short,
         long,
         required = false, // Only conditionally required based on command - validated in Config::new
-        help = "The old kernel version (e.g., \"6.14.3\")",
-        long_help = "The old kernel version (Major.Minor.Patch, e.g., \"6.14.3\").\n\
+        help = "The old kernel version (e.g., \"6.15.3\")",
+        long_help = "The old kernel version (Major.Minor.Patch, e.g., \"6.15.3\").\n\
         Required for DKMS operations ('dkms-install') or the default command.\n\
         If provided with these commands, it must be strictly less than the --new version (validated later)."
     )] // Updated long_help to indicate where validation occurs

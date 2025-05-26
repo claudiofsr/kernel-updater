@@ -65,17 +65,17 @@ mod tests_version {
 
     #[test]
     fn test_version_from_str_valid() {
-        let version = "6.14.3";
+        let version = "6.15.3";
         let parsed_version = Version::from_str(version).expect("Failed to parse valid version");
         assert_eq!(parsed_version.major, 6);
-        assert_eq!(parsed_version.minor, 14);
+        assert_eq!(parsed_version.minor, 15);
         assert_eq!(parsed_version.patch, 3);
 
-        let version_leading_trailing_spaces = "  6.14.3  ";
+        let version_leading_trailing_spaces = "  6.15.3  ";
         let parsed_version_spaces = Version::from_str(version_leading_trailing_spaces)
             .expect("Failed to parse valid version with spaces");
         assert_eq!(parsed_version_spaces.major, 6);
-        assert_eq!(parsed_version_spaces.minor, 14);
+        assert_eq!(parsed_version_spaces.minor, 15);
         assert_eq!(parsed_version_spaces.patch, 3);
     }
 
@@ -83,10 +83,10 @@ mod tests_version {
     fn test_version_display() {
         let version = Version {
             major: 6,
-            minor: 14,
+            minor: 15,
             patch: 3,
         };
-        assert_eq!(format!("{}", version), "6.14.3");
+        assert_eq!(format!("{}", version), "6.15.3");
     }
 
     #[test]
@@ -112,8 +112,8 @@ mod tests_version {
 
     #[test]
     fn test_version_from_str_invalid() {
-        // Test string with too few components (e.g., 6.14 splits to 2 components)
-        let result_too_few = Version::from_str("6.14");
+        // Test string with too few components (e.g., 6.15 splits to 2 components)
+        let result_too_few = Version::from_str("6.15");
         assert!(result_too_few.is_err());
         let err_too_few = result_too_few.unwrap_err();
         // Check it's the correct error variant for wrong number of components
@@ -131,8 +131,8 @@ mod tests_version {
             );
         }
 
-        // Test string with too many components (e.g., 6.14.3.1 splits to 4 components)
-        let result_too_many = Version::from_str("6.14.3.1");
+        // Test string with too many components (e.g., 6.15.3.1 splits to 4 components)
+        let result_too_many = Version::from_str("6.15.3.1");
         assert!(result_too_many.is_err());
         let err_too_many = result_too_many.unwrap_err();
         // Check it's the correct error variant for wrong number of components
@@ -201,11 +201,11 @@ mod tests_version {
             );
         }
 
-        // Test string with empty components (e.g., 6.14. splits to ["6", "14", ""])
-        let result_empty_components_2 = Version::from_str("6.14.");
+        // Test string with empty components (e.g., 6.15. splits to ["6", "15", ""])
+        let result_empty_components_2 = Version::from_str("6.15.");
         assert!(result_empty_components_2.is_err());
         let err_empty_components_2 = result_empty_components_2.unwrap_err();
-        // "6.14." splits to ["6", "14", ""] which causes a ParseIntError on "" -> VersionParseIntError
+        // "6.15." splits to ["6", "15", ""] which causes a ParseIntError on "" -> VersionParseIntError
         if let KernelUpdaterError::VersionParseIntError { source: _ } = err_empty_components_2 {
             assert!(
                 err_empty_components_2

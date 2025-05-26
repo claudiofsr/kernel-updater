@@ -94,7 +94,7 @@ pub enum KernelUpdaterError {
     }, // Automatic conversion from ParseIntError
 
     #[error(
-        "Invalid version format '{input}': expected exactly three dot-separated numbers (e.g., X.Y.Z as 6.14.3)"
+        "Invalid version format '{input}': expected exactly three dot-separated numbers (e.g., X.Y.Z as 6.15.3)"
     )]
     VersionParseFormatError { input: String },
 }

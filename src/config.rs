@@ -209,10 +209,10 @@ mod tests_config {
 
     #[test]
     fn test_config_new_default_valid() {
-        let args = create_test_args(Some("6.14.3"), "6.14.4", None);
+        let args = create_test_args(Some("6.15.3"), "6.15.4", None);
         let config =
             Config::new(args.clone()).expect("Config::new should succeed for valid default args");
-        let expected = expected_config_valid(Some("6.14.3"), "6.14.4", None);
+        let expected = expected_config_valid(Some("6.15.3"), "6.15.4", None);
         assert_eq!(config, expected);
     }
 

@@ -34,18 +34,18 @@ Run with `sudo`: `sudo kernel-updater [OPTIONS] [COMMAND]`
 
 ## Examples
 
-Assuming update from 6.14.3 to 6.14.4:
+Assuming update from 6.15.3 to 6.15.4:
 
-*   Full update: `sudo kernel-updater -o 6.14.3 -n 6.14.4`
-*   Compile 6.14.4 only: `sudo kernel-updater -n 6.14.4 kernel-compile`
-*   Install 6.14.4 (after compile): `sudo kernel-updater -n 6.14.4 kernel-install`
-*   Update DKMS for 6.14.4/6.14.3 (after 6.14.4 installed): `sudo kernel-updater -o 6.14.3 -n 6.14.4 dkms-install`
+*   Full update: `sudo kernel-updater -o 6.15.3 -n 6.15.4`
+*   Compile 6.15.4 only: `sudo kernel-updater -n 6.15.4 kernel-compile`
+*   Install 6.15.4 (after compile): `sudo kernel-updater -n 6.15.4 kernel-install`
+*   Update DKMS for 6.15.4/6.15.3 (after 6.15.4 installed): `sudo kernel-updater -o 6.15.3 -n 6.15.4 dkms-install`
 
 ## Important Validation
 
 For the default command and `dkms-install`, the NEW version (`-n`) must be strictly greater than the OLD version (`-o`).
-*   Valid: `kernel-updater -o 6.14.3 -n 6.14.4`
-*   Invalid: `kernel-updater -o 6.14.4 -n 6.14.3` (NEW <= OLD fails validation)
+*   Valid: `kernel-updater -o 6.15.3 -n 6.15.4`
+*   Invalid: `kernel-updater -o 6.15.4 -n 6.15.3` (NEW <= OLD fails validation)
 
 ## Notes & Warnings
 
