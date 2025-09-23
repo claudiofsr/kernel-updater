@@ -47,13 +47,13 @@ impl Config {
         let custom_kernel_suffix = args.suffix;
 
         // --- Validation 1: If old version is provided, new MUST be strictly greater ---
-        if let Some(old_version) = &args.old {
-            if &args.new <= old_version {
-                return Err(KernelUpdaterError::VersionComparisonError {
-                    new: args.new.clone(),
-                    old: old_version.clone(),
-                });
-            }
+        if let Some(old_version) = &args.old
+            && &args.new <= old_version
+        {
+            return Err(KernelUpdaterError::VersionComparisonError {
+                new: args.new.clone(),
+                old: old_version.clone(),
+            });
         }
 
         // --- Validation 2: Check if --old is required by the command ---
