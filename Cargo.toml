@@ -1,0 +1,27 @@
+[package]
+name = "kernel-updater"
+version = "0.1.0"
+edition = "2024"
+description = "A utility to automate steps for compiling, installing custom Linux kernels and managing NVIDIA DKMS modules."
+license = "MIT"
+authors = [
+    "Claudio Fernandes de Souza Rodrigues <claudiofsrodrigues@gmail.com>",
+]
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+thiserror = "2.0"
+
+[profile.release]
+# https://doc.rust-lang.org/cargo/reference/profiles.html
+debug = true            # debug info at all.
+strip = "symbols"       # Strip symbols from a binary.
+opt-level = 3           # All optimizations.
+overflow-checks = true  # Panic will occur on overflow.
+lto = true              # Enable link time optimization.
+codegen-units = 1       # Use a single codegen for size optimization.
+panic = "abort"         # Remove traceback information.
+incremental = true      # Save information to disk, improving re-compile times.
+
+[profile.dev]
+opt-level = 1           # Use slightly better optimizations.
