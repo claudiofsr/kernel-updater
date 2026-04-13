@@ -40,7 +40,11 @@ impl Config {
     pub fn new(args: Arguments) -> Result<Self, KernelUpdaterError> {
         // Return our specific error
         // Standard, often distribution-dependent constants
-        let kernel_url_base = "https://cdn.kernel.org/pub/linux/kernel/v6.x".to_string();
+        let kernel_version_major = args.new.major;
+        let kernel_url_base = format!(
+            "https://cdn.kernel.org/pub/linux/kernel/v{}.x",
+            kernel_version_major
+        );
         let kernel_src_base = PathBuf::from("/lib/modules");
         let kernel_module_base = PathBuf::from("/lib/modules");
         let kernel_config_base = PathBuf::from("/lib/modules");
@@ -188,7 +192,11 @@ mod tests_config {
         let version_new_val = args.new.clone();
 
         let custom_kernel_suffix = "ClaudioFSR".to_string();
-        let kernel_url_base = "https://cdn.kernel.org/pub/linux/kernel/v6.x".to_string();
+        let kernel_version_major = args.new.major;
+        let kernel_url_base = format!(
+            "https://cdn.kernel.org/pub/linux/kernel/v{}.x",
+            kernel_version_major
+        );
         let kernel_src_base = PathBuf::from("/lib/modules");
         let kernel_module_base = PathBuf::from("/lib/modules");
         let kernel_config_base = PathBuf::from("/lib/modules");
