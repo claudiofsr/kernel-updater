@@ -30,6 +30,12 @@ fn run() -> KernelUpdaterResult<()> {
         Some(Commands::KernelInstall) => {
             println!("Executing: Kernel Installation...");
             builder.install()?;
+
+            // Build DKMS modules (nvidia, etc.) before creating the initramfs image
+            if let Err(err) = dkms.install_modules() {
+                eprintln!("Warning: DKMS installation failed or skipped: {err}");
+            }
+
             builder.run_mkinitcpio()?;
             update_grub()?;
         }
